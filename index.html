@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vip视频解析</title>
+    <meta name="keywords" content="vip解析,vip视频在线解析,vip视频解析,优酷vip解析,优酷视频在线解析,爱奇艺vip解析,腾讯视频vip解析,vip解析网站,腾讯视频vip解析接口,vip视频云解析,vip解析接口,1905视频解析,芒果tv视频解析,乐视vip解析,搜狐视频vip解析,vip视频解析网址,无广告视频vip解析接口,vip视频解析万能接口,全网vip视频解析接口">
+    <meta name="description" content="林夕专注vip解析,vip视频在线解析,vip视频解析,优酷vip解析,优酷视频在线解析,爱奇艺vip解析,腾讯视频vip解析,vip解析网站,腾讯视频vip解析接口,vip视频云解析,vip解析接口,1905视频解析,芒果tv视频解析,乐视vip解析,搜狐视频vip解析,vip视频解析网址,无广告视频vip解析接口,vip视频解析万能接口,全网vip视频解析接口">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="shortcut  icon" type="image/x-icon" href="favicon.ico" media="screen"  />
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="module/aboutModule.js"></script>
+    <script src="module/homeModule.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+
+        @media screen and (max-width:480px){
+            iframe{ height: 300px}
+        }
+        @media (min-width: 481px) and (max-width: 768px){
+            iframe{ height: 400px}
+        }
+
+        @media screen and (min-width: 769px){
+            iframe{ height: 500px;}
+        }
+        @media screen and (min-width: 1000px){
+            iframe{ height: 600px;}
+        }
+    </style>
+    <script>
+        var myApp =angular.module('myApp',['ngRoute','aboutModule','homeModule']);
+        myApp.config(function ($routeProvider) {
+            $routeProvider.when(
+                '/about',
+                {
+                    templateUrl:'./views/about.html',
+                    controller: 'aboutController'
+                }).when(
+                    '/home',
+                {
+                    templateUrl:'./views/home.html',
+                    controller:'homeController'
+                }
+                ).when(
+                    '/',
+                {
+                    templateUrl:'./views/home.html',
+                    controller:'homeController'
+                }
+            )
+        });
+        myApp.controller('myController',function ($scope) {
+            $scope.homeTitles = [
+                {'name':'首页','value':'#/home'},
+                {'name':'关于',  'value':'#/about'}
+                ];
+
+
+            $scope.setNowCurrent = function (nowvalue) {
+                $scope.nowCurrent = nowvalue;
+            }
+        });
+
+
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="homeController" style="background: #DCE9F5">
+<nav class="navbar navbar-inverse" ng-controller="myController">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--<a class="navbar-brand" href="#">Brand</a>-->
+            <div style="height: 50px; width: 50px; overflow: hidden; background: url('img/logo.png') no-repeat center" >
+                <h1 style="margin-top: 0px; list-style: none; ">
+                    <a title="vip视频解析"  href='#/home' ng-click='setNowCurrent(0)' style="width: 50px; height: 50px; display: block; font-size: 12px; text-indent: -2000em;">
+
+                        vip视频解析
+                    </a>
+
+                </h1>
+            </div>
+
+
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ng-repeat="title in homeTitles" ng-class="nowCurrent==$index? 'active':' '" ng-click="setNowCurrent($index)"><a ng-href="{{title.value}}">{{title.name}} </a></li>
+
+
+            </ul>
+
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<ng-view></ng-view>
+
+</body>
+</html>
+

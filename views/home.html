@@ -1,0 +1,84 @@
+<div class="container" >
+    <p class="text-center">温馨提示：复制VIP视频的地址到↓↓↓↓↓栏中点击播放按钮即可！如果不能播放请在选择接口处更改接口或线路!</p>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-6">
+
+                <select id="selectInterface" class="form-control">
+                    <option ng-repeat="item in interfaceDatas" value="{{item.value}}">{{item.desc}}</option>
+
+                </select>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input id="inputVideoUrl" type="text" class="form-control" ng-model="videoUrl" placeholder="请输入VIP视频网址链接">
+                    <span class="input-group-btn">
+                           <button id="playButton" class="btn btn-default" type="button" ng-click="changeVideoUrl()">播放</button>
+                        </span>
+                </div>
+            </div><!-- /.col-lg-6 -->
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12">
+            <iframe id="iframe" src=""   style="width: 100%;  seamless:'seamless';scrolling:no; margin-top: 20px; background: black"></iframe>
+            <!--<iframe  id="iframe" src="{{playUrl}}"   style="width: 100%; height: 600px; seamless:'seamless';scrolling:no; margin-top: 20px; background: black"></iframe>-->
+        </div>
+    </div>
+
+</div>
+
+<p class="text-center">本站所有接口均来至互联网仅提供本地测试使用，请勿用于任何商业用途，否则后果自负。</p>
+<div class="container">
+    <button class="btn-primary btn pull-right" id="button-light">关灯</button>
+
+</div>
+<script>
+    $(function () {
+
+
+        $('#playButton').click(function () {
+
+            var interface = $('#selectInterface').find("option:selected").val();
+
+            var url =$("#inputVideoUrl").val();
+            if(!url){
+                return
+            }
+            $('#iframe').attr("src", interface+url);
+        });
+
+
+        var isLight = false;
+
+        $('#button-light').click(function () {
+            isLight = !isLight;
+            setBg();
+
+        });
+
+        function setBg() {
+            if(isLight){
+                $('body').css('background','#000');
+                $('#button-light').text("开灯");
+
+            }else {
+                $('body').css('background','#DCE9F5');
+                $('#button-light').text("关灯");
+
+            }
+        }
+        setBg();
+
+
+    });
+
+</script>
